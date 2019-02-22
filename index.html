@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+      <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="keywords" content="My lovely zed carousel">
+      <meta name="author" content="adamaka47">
+      <meta name="description" content="There are best">
+      <link rel="icon" type="image/x-icon" href="faviconka_ru_100.ico" />
+      <link rel="apple-touch-icon-precomposed" href="faviconka_ru_100.ico">
+      <meta property="og:image" content="adam4.png">   
+      <link href="https://fonts.googleapis.com/css?family=Laila:300,700" rel="stylesheet">
+      <title>Style on my team</title>
+      <link rel="stylesheet" href="main.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+      <script src="jquery-3.3.1.min.js"></script>
+      <script src="jquery.reflection.js"></script>
+      <script src="jquery.cloud9carousel.js"></script>
+</head>
+<body>
+      <div id="wrapper">
+            <div id="showcase">
+                  <img src="adam1.png" alt="Championship" class="cloud9-item">
+                  <img src="adam2.png" alt="Project" class="cloud9-item">
+                  <img src="adam3.png" alt="Nightmare" class="cloud9-item">
+                  <img src="iAm.png" alt="FaceOfHim" class="cloud9-item">
+                  <img src="adam5.png" alt="Sadness" class="cloud9-item">
+                  <img src="adam4.png" alt="Justicar" class="cloud9-item">
+            </div>
+
+            <p id="item">&nbsp;</p>
+
+            <div class="nav">
+                  <button class="left"><i class="fa fa-arrow-left"></i></button>
+                  <button class="right"><i class="fa fa-arrow-right"></i></button>
+            </div>
+
+      </div>
+
+      <script type="text/javascript">
+
+      $(function() {
+            var showcase = $("#showcase")
+
+            showcase.Cloud9Carousel( {
+                  yPos: 102,
+                  yRadius: 68,
+                  mirrorOptions: {
+                        gap: 12,
+                        height: 0.2
+                  },
+                  buttonLeft: $(".nav > .left"),
+                  buttonRight: $(".nav > .right"),
+                  bringToFront: true,
+                  onRendered: showcaseUpdated,
+                  onLoaded: function() {
+                        showcase.css( 'visibility', 'visible' )
+                        showcase.css( 'display', 'none')
+                        showcase.fadeIn( 500 )
+                  }
+            })
+
+            function showcaseUpdated( showcase ) {
+                  var title = $("#item").html(
+                        $(showcase.nearestItem()).attr( 'alt' )
+                  )
+
+                  var c = Math.cos((showcase.floatIndex() % 1) * 2 * Math.PI)
+                  title.css('opacity', 0.8 + (0.7 * c))
+            }
+
+            $('.nav > button').click( function( e ) {
+                  var b = $(e.target).addClass( 'down' )
+                  setTimeout( function() { b.removeClass( 'down' ) }, 80)
+            } )
+
+            $(document).keydown( function( e ) {
+                  switch( e.keyCode ) {
+                        case 37:
+                        $('.nav > .left').click()
+                        break
+
+                        case 39:
+                        $('.nav > .right').click()
+                  }
+            })
+      })
+
+      </script>
+</body>
+</html>
